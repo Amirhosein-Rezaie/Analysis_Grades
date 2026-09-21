@@ -12,8 +12,10 @@ class Database:
         self.Cursor = self.Connection.cursor()
 
     # send a query to the database
-    def Get_Query(self, query:str):
+    def Get_Query(self, query:str, auto_commit:bool = True):
         self.Cursor.execute(query)
+
+        if auto_commit : self.Perform_Queries()
 
     # run the queries that sent before
     def Perform_Queries(self):
