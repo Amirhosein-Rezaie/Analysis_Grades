@@ -1,7 +1,6 @@
-from tools.func import (
-    check_database_first_time, run_command, start_database, press_enter_to_continue
-)
+from tools.func import *
 from msvcrt import getwch
+from students import features
 
 # varialbes
 flag_first_time_run = check_database_first_time()
@@ -34,7 +33,7 @@ def list_of_subworks(number_work:int):
     "show the list of subworks base on list of works"
     
     subworks = {
-        1: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
+        1: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search", "(5) --- Show all"],
         2: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
         3: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
         4: ["(1) --- Avrg of student"],
@@ -45,7 +44,7 @@ def list_of_subworks(number_work:int):
     for value in subworks[number_work]:
         print("\t\t" + value)
 
-    print("Enter the number of subwork [0,4] : ", flush=True, end='')
+    print("Enter the number of subwork : ", flush=True, end='')
     while True:
         try:
             number = int(getwch()); print(number)
@@ -61,7 +60,7 @@ def perform_func(code_work: int, code_subwork:int) -> None:
     
     func = {
         1: {
-            
+            1: features.add_student
         },
         2:{
             
@@ -74,7 +73,11 @@ def perform_func(code_work: int, code_subwork:int) -> None:
         }
     }
 
+    splitter_line()
+    
     func[code_work][code_subwork]()
+    
+    splitter_line()
 
 # main of program
 def main() -> None:
@@ -97,6 +100,8 @@ def main() -> None:
         code_subwork = list_of_subworks(code_work)
         
         if code_subwork == 0: continue
+        
+        perform_func(code_work, code_subwork)
         
         press_enter_to_continue()
         
