@@ -28,3 +28,23 @@ def add_student() -> int:
         print("Adding new student Failed ... !", flush=True)
         
         return 1
+
+# get all of students in the database
+def get_all_students():
+    "get all of students in the database"
+    
+    global student
+    
+    # get query to the database 
+    rows = student.Get_Query("SELECT * FROM students", fetch_result=True)
+    
+    # show the title or template of table of students 
+    print("\n" + "-" * 60)
+    print(f"{'ID':<5} | {'Firstname':<15} | {'Lastname':<15} | {'National Code':<15}")
+    print("-" * 60)
+
+    # show the data in the table
+    for row in rows:
+        print(f"{row[0]:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
+        
+    print("-" * 60 + "\n")
