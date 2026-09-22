@@ -32,6 +32,7 @@ def list_of_works() -> int:
 def list_of_subworks(number_work:int):
     "show the list of subworks base on list of works"
     
+    subworks_number = {1: 5, 2: 4, 3: 4, 4: 1} # the max number that user can choice as subword for each of works
     subworks = {
         1: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search", "(5) --- Show all"],
         2: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
@@ -49,7 +50,7 @@ def list_of_subworks(number_work:int):
         try:
             number = int(getwch())
             
-            if number >= 0 and number <= 5:
+            if number >= 0 and number <= subworks_number[number_work]:
                 print(number)
                 
                 return number
