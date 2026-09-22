@@ -12,15 +12,17 @@ class Database:
         self.__Cursor = self.__Connection.cursor()
 
     # send a query to the database
-    def Get_Query(self, query:str, auto_commit:bool = True):
+    def Get_Query(self, query:str, fetch_result:bool = False, auto_commit:bool = True):
         self.__Cursor.execute(query)
 
         if auto_commit : self.Perform_Queries()
+
+        if fetch_result : return self.__Cursor.fetchall()
 
     # run the queries that sent before
     def Perform_Queries(self):
         self.__Connection.commit()
 
-    # close the __Connection of db
+    # close the Connection of db
     def Close_database(self):
         self.__Connection.close()
