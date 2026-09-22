@@ -41,15 +41,16 @@ def list_of_subworks(number_work:int):
     }
 
     # show the list of subworks
+    print("\t\t" + "(0) --- Go back")
     for value in subworks[number_work]:
         print("\t\t" + value)
 
-    print("Enter the number of subwork [1,4] : ", flush=True, end='')
+    print("Enter the number of subwork [0,4] : ", flush=True, end='')
     while True:
         try:
             number = int(getwch()); print(number)
             
-            if number >= 1 and number <= 4:
+            if number >= 0 and number <= 4:
                 return number
         except:
             pass
@@ -73,6 +74,8 @@ def main() -> None:
         run_command(r"cls")
         code_work = list_of_works()
         code_subwork = list_of_subworks(code_work)
+        
+        if code_subwork == 0: continue
         
         press_enter_to_continue()
         
