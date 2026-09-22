@@ -55,6 +55,27 @@ def list_of_subworks(number_work:int):
         except:
             pass
 
+# run the func of work base on the number that user entered
+def perform_func(code_work: int, code_subwork:int) -> None:
+    "run the func of work base on the number that user entered"
+    
+    func = {
+        1: {
+            
+        },
+        2:{
+            
+        },
+        3: {
+            
+        },
+        4: {
+            
+        }
+    }
+
+    func[code_work][code_subwork]()
+
 # main of program
 def main() -> None:
     "main of program"
