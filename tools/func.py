@@ -27,3 +27,9 @@ def press_enter_to_continue() -> None:
         char = getwch()
         
         if repr(char) == repr('\r'): break
+
+# the function for show a splitter line
+def splitter_line() -> None:
+    "show a splitter line"
+    
+    print("-" * 80)
