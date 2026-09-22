@@ -1,6 +1,6 @@
 from tools.func import *
 from msvcrt import getwch
-from students import features
+from students import features as student_features
 
 # varialbes
 flag_first_time_run = check_database_first_time()
@@ -47,9 +47,11 @@ def list_of_subworks(number_work:int):
     print("Enter the number of subwork : ", flush=True, end='')
     while True:
         try:
-            number = int(getwch()); print(number)
+            number = int(getwch())
             
-            if number >= 0 and number <= 4:
+            if number >= 0 and number <= 5:
+                print(number)
+                
                 return number
         except:
             pass
@@ -60,7 +62,9 @@ def perform_func(code_work: int, code_subwork:int) -> None:
     
     func = {
         1: {
-            1: features.add_student
+            1: student_features.add_student, 2: None,
+            3: None, 4: None,
+            5: student_features.get_all_students,
         },
         2:{
             
