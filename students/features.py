@@ -48,3 +48,32 @@ def get_all_students():
         print(f"{row[0]:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
         
     print("-" * 60 + "\n")
+
+
+# delete a specific student by national code
+def delete_student():
+    "delete a specific student by national code"
+    
+    global student
+    
+    code = input("Enter the national code of student that you want to delete : ")
+    
+    try:
+        deleted_student = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)[0]
+    except IndexError:
+        print("The student not found ... !")
+        
+        return 1 
+    
+    try:
+        student.Get_Query(f"DELETE FROM students WHERE code='{code}'")
+        
+        print(f"{deleted_student[1]} {deleted_student[2]} student deleted Successfully ... !")
+        
+        return 0
+        
+    except:
+        print(f"Deleting {deleted_student[1]} {deleted_student[2]} student failed ... !")
+        
+        return 1
+    
