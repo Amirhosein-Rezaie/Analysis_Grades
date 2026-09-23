@@ -80,7 +80,7 @@ def perform_func(code_work: int, code_subwork:int) -> None:
         1: {
             1: student_features.add_student, 2: student_features.delete_student,
             3: student_features.edit_student, 4: student_features.search_student,
-            5: student_features.get_all_students,
+            5: student_features.show_all_students,
         },
         2:{
             
