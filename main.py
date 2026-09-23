@@ -99,8 +99,11 @@ def main() -> None:
             press_enter_to_continue()
             flag_first_time_run = False
 
-        # get the number of work from user
+        # start the program
         run_command(r"cls")
+        print("Welcome to Management of Grades and students App")
+
+        # get the number of work from user
         code_work = list_of_works()
         code_subwork = list_of_subworks(code_work)
         
