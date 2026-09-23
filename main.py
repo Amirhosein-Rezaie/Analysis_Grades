@@ -63,7 +63,7 @@ def perform_func(code_work: int, code_subwork:int) -> None:
     
     func = {
         1: {
-            1: student_features.add_student, 2: None,
+            1: student_features.add_student, 2: student_features.delete_student,
             3: None, 4: None,
             5: student_features.get_all_students,
         },
