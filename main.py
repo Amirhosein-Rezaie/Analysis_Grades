@@ -41,11 +41,11 @@ def list_of_subworks(number_work:int):
     }
 
     # show the list of subworks
-    print("\t\t" + "(0) --- Go back")
+    print("\n" + "\t\t" + "(0) --- Go back")
     for value in subworks[number_work]:
         print("\t\t" + value)
 
-    print("Enter the number of subwork : ", flush=True, end='')
+    print("\n" + f"Enter the number of subwork [0,{subworks_number[number_work]}]: ", flush=True, end='')
     while True:
         try:
             number = int(getwch())
