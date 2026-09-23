@@ -39,7 +39,7 @@ def splitter_line() -> None:
     print("-" * 80)
 
 # show a splitter line for table. the arg is position of line that can manage by the const in this module
-def splliter_line_table(new_line_position:int) -> None:
+def splitter_line_table(new_line_position:int) -> None:
     "show a splitter line for table. the arg is position of line that can manage by the const in this module"
     
     if new_line_position == 1: print("\n" + "-" * 60)
