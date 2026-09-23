@@ -1,7 +1,26 @@
 from database.Database import Database
+from tools.func import (
+    splitter_line_table, UP_POSITION_NEW_LINE_TABLE, MID_POSITION_NEW_LINE_TABLE, DN_POSITION_NEW_LINE_TABLE
+)
 
 # variables
 student = Database("database.sqlite3")
+
+
+# functions as tools
+def show_one_student(student_data):
+    "a function that show one student in the table"
+    data = student_data
+    
+    splitter_line_table(UP_POSITION_NEW_LINE_TABLE)
+        
+    print(f"{'ID':<5} | {'firstname':<15} | {'lastname':<15} | {'national_code':<15}")
+    splitter_line_table(MID_POSITION_NEW_LINE_TABLE)
+    
+    print(f"{data[0]:<5} | {data[1]:<15} | {data[2]:<15} | {data[3]:<15}")
+    
+    splitter_line_table(DN_POSITION_NEW_LINE_TABLE)
+
 
 # add student
 def add_student() -> int:
@@ -39,15 +58,16 @@ def get_all_students():
     rows = student.Get_Query("SELECT * FROM students", fetch_result=True)
     
     # show the title or template of table of students 
-    print("\n" + "-" * 60)
+    splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE)
     print(f"{'ID':<5} | {'Firstname':<15} | {'Lastname':<15} | {'National Code':<15}")
-    print("-" * 60)
+    
+    splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE)
 
     # show the data in the table
     for row in rows:
         print(f"{row[0]:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
         
-    print("-" * 60 + "\n")
+    splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
 
 
 # delete a specific student by national code
@@ -77,6 +97,46 @@ def delete_student():
         
     except:
         print(f"Deleting {deleted_student[1]} {deleted_student[2]} student failed ... !")
+        
+        return 1
+
+# edit the student data by using nationl code
+def edit_student():
+    "edit the student data by using nationl code"
+    
+    global student
+    
+    # get input natioal code from the user
+    code = input("Enter the nationl code : ")
+    
+    # try to find the student that in going to edit
+    data = None
+    
+    try:
+        data = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)[0]
+    except:
+        print("The student not found ... !")
+        return 1
+    
+    # show the data of student in a table
+    show_one_student(data)
+    
+    # get new data from the user
+    new_firstname = input(f"Enter the new firstname of {data[1]} : ")
+    new_lastname = input(f"Enter the new lastname of {data[2]} : ")
+    new_code = input(f"Enter the new nationl_code of {data[3]} : ")
+    
+    # try to update data of the student in the database
+    try:
+        student.Get_Query(
+            f"UPDATE students SET firstname='{new_firstname}', lastname='{new_lastname}', code='{new_code}' WHERE code='{code}'"
+        )
+        print("Student updated Successfuly ... !")
+        
+        return 0
+        
+    except:
+        print("Updating student failed ... !")
         
         return 1
     
