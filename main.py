@@ -109,11 +109,21 @@ def main() -> None:
     
         # check database exists for realise to the program ran first time
         if flag_first_time_run == True:
-            start_database()
-            print("Database created Successfully ... !")
-            press_enter_to_continue()
-            flag_first_time_run = False
-
+            
+            # try to create databse file and tables
+            run_command(r"cls")
+            try:
+                start_database()
+                print("Database created Successfully ... !" + "\n")
+                
+                flag_first_time_run = False
+                
+                press_enter_to_continue()
+            except:
+                print("Creating databse file Failed ... !" + "\n")
+                press_enter_to_continue()
+                continue
+            
         # start the program
         run_command(r"cls")
         print("Welcome to Management of Grades and students App")
