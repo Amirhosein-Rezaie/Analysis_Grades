@@ -49,7 +49,7 @@ def add_student() -> int:
         return 1
 
 # get all of students in the database
-def get_all_students():
+def show_all_students():
     "get all of students in the database"
     
     global student
@@ -59,13 +59,15 @@ def get_all_students():
     
     # show the title or template of table of students 
     splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE)
-    print(f"{'ID':<5} | {'Firstname':<15} | {'Lastname':<15} | {'National Code':<15}")
+    print(f"{'#':<5} | {'Firstname':<15} | {'Lastname':<15} | {'National Code':<15}")
     
     splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE)
 
     # show the data in the table
+    row_number = 1
     for row in rows:
-        print(f"{row[0]:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
+        print(f"{row_number:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
+        row_number += 1
         
     splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
 
