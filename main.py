@@ -21,10 +21,10 @@ def list_of_works() -> int:
     print("Enter the number of work [1,4] : ", flush=True, end='')
     while True:
         try:
-            number = int(getwch()); print(number)
+            number = int(getwch())
             
             if number >= 1 and number <= 4:
-                return number
+                print(number); return number
         except:
             pass
 
