@@ -1,6 +1,5 @@
 from tools.func import *
 from msvcrt import getwch
-from students import features as student_features
 
 # varialbes
 flag_first_time_run = check_database_first_time()
@@ -73,6 +72,10 @@ def list_of_subworks(number_work:int):
 def perform_func(code_work: int, code_subwork:int) -> None:
     "run the func of work base on the number that user entered"
     
+    # import the modules that include the features
+    from students import features as student_features
+    
+    # list of feature's functions
     func = {
         1: {
             1: student_features.add_student, 2: student_features.delete_student,
