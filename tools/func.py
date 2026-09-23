@@ -3,6 +3,10 @@ from subprocess import run
 from os.path import exists
 from msvcrt import getwch
 
+UP_POSITION_NEW_LINE_TABLE = 1
+MID_POSITION_NEW_LINE_TABLE = 2
+DN_POSITION_NEW_LINE_TABLE = 3
+
 # run a command in cmd
 def run_command(command:str) -> int:
     try:
@@ -33,3 +37,13 @@ def splitter_line() -> None:
     "show a splitter line"
     
     print("-" * 80)
+
+# show a splitter line for table. the arg is position of line that can manage by the const in this module
+def splliter_line_table(new_line_position:int) -> None:
+    "show a splitter line for table. the arg is position of line that can manage by the const in this module"
+    
+    if new_line_position == 1: print("\n" + "-" * 60)
+    
+    elif new_line_position == 2: print("-" * 60)
+    
+    else: print("-" * 60 + "\n")
