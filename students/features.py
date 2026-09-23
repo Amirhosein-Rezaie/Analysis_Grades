@@ -56,8 +56,10 @@ def delete_student():
     
     global student
     
+    # get input from user
     code = input("Enter the national code of student that you want to delete : ")
     
+    # try to found the student that is going to delete
     try:
         deleted_student = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)[0]
     except IndexError:
@@ -65,6 +67,7 @@ def delete_student():
         
         return 1 
     
+    # try to delete the student by the nationl code
     try:
         student.Get_Query(f"DELETE FROM students WHERE code='{code}'")
         
