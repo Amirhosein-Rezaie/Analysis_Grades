@@ -12,10 +12,10 @@ def list_of_works() -> int:
     
     print(
         """
-        (1) --- students management
-        (2) --- subjects management
-        (3) --- grades managements
-        (4) --- analysis grades
+        (1) students management
+        (2) subjects management
+        (3) grades managements
+        (4) analysis grades
         """
     )
     print("Enter the number of work [1,4] : ", flush=True, end='')
@@ -34,16 +34,28 @@ def list_of_subworks(number_work:int):
     
     subworks_number = {1: 5, 2: 4, 3: 4, 4: 1} # the max number that user can choice as subword for each of works
     subworks = {
-        1: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search", "(5) --- Show all"],
-        2: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
-        3: ["(1) --- Add", "(2) --- Delete", "(3) --- Edit", "(4) --- Search"],
-        4: ["(1) --- Avrg of student"],
+        1: {
+            "features":["(1) Add", "(2) Delete", "(3) Edit", "(4) Search", "(5) Show all"],
+            "suffix": "student"
+            },
+        2: {
+            "features": ["(1) Add", "(2) Delete", "(3) Edit", "(4) Search"],
+            "suffix": "Subject"
+            },
+        3: {
+            "features":["(1) Add", "(2) Delete", "(3) Edit", "(4) Search"],
+            "suffix": "Grade"
+            },
+        4: {
+            "features": ["(1) Avrg "],
+            "suffix": "Student"
+            },
     }
 
     # show the list of subworks
-    print("\n" + "\t\t" + "(0) --- Go back")
-    for value in subworks[number_work]:
-        print("\t\t" + value)
+    print("\n" + "\t\t" + "(0) Go back")
+    for value in subworks[number_work]["features"]:
+        print("\t\t" + value + " " + subworks[number_work]["suffix"] + "(s)")
 
     print("\n" + f"Enter the number of subwork [0,{subworks_number[number_work]}]: ", flush=True, end='')
     while True:
