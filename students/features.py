@@ -129,7 +129,10 @@ def edit_student():
     # try to update data of the student in the database
     try:
         student.Get_Query(
-            f"UPDATE students SET firstname='{new_firstname}', lastname='{new_lastname}', code='{new_code}' WHERE code='{code}'"
+            f"""UPDATE students 
+                SET firstname='{new_firstname}', lastname='{new_lastname}', code='{new_code}'
+                WHERE code='{code}'
+                """
         )
         print("Student updated Successfuly ... !")
         
@@ -139,4 +142,21 @@ def edit_student():
         print("Updating student failed ... !")
         
         return 1
+
+# search the student 
+def search_student() -> None:
+    "search the student "
     
+    code = input("Enter the national code : ")
+    
+    # try to find the student that in going to edit
+    data = None
+    
+    try:
+        data = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)[0]
+    except:
+        print("The student not found ... !")
+        return 1
+    
+    # show the data of student in a table
+    show_one_student(data)
