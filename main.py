@@ -116,13 +116,13 @@ def main() -> None:
             run_command(r"cls")
             try:
                 start_database()
-                print("Database created Successfully ... !" + "\n")
+                print("Database created Successfuly ... !" + "\n")
                 
                 flag_first_time_run = False
                 
                 press_enter_to_continue()
             except:
-                print("Creating databse file Failed ... !" + "\n")
+                print("Creating database file Failed ... !" + "\n")
                 press_enter_to_continue()
                 continue
             
