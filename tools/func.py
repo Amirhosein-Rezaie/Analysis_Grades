@@ -47,3 +47,32 @@ def splitter_line_table(new_line_position:int) -> None:
     elif new_line_position == 2: print("-" * 60)
     
     else: print("-" * 60 + "\n")
+
+# make table for many datas
+def table(rows: list, columns: list) -> None:
+    "make table for many datas. rows have to be 2D list."
+
+    splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE)
+    print(f"{'#':<5} | ", end='')
+
+    # header
+    for column in columns:
+        print(f"{column:<15}", end=' | ')
+    print()
+
+    splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE)
+
+    # data
+    row_number = 1
+    for row in rows:
+        row = list(row)[1:]
+
+        print(f"{row_number:<5}", end=' | ')
+
+        for data in row:
+            print(f"{data:<15}", end=' | ')
+        print()
+
+        row_number += 1
+
+    splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
