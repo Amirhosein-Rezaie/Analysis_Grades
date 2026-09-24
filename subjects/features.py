@@ -1,6 +1,6 @@
 from database.Database import Database
 from msvcrt import getwch
-from tools.func import table
+from tools.func import check_number_greater_zero, press_enter_to_continue, table
 
 # variables
 subject = Database("database.sqlite3")
@@ -100,3 +100,55 @@ def delete_subject() -> int:
     else:
         print(f"You canceled the deleting {title_sbj} ... !")
         return 1
+
+# edit the subject by code
+def edit_subject() -> int:
+    "edit the subject by code"
+    
+    global subject
+    
+    # get input from user
+    code = input("Enter the code of subject : ")
+    
+    flag_find = False
+    
+    # try to find the subject
+    try:
+        data = subject.Get_Query(
+            f"SELECT * FROM subjects WHERE code='{code}'", fetch_result=True
+        )
+        
+        if data != []:
+            table(data, columns)
+            flag_find = True
+        else:
+            print(f"The Subject with {code} code not found ... !")
+            return 1
+    except:
+        print("Problem in searching for subject ... !")
+        return 1
+
+    # try to edit the subject
+    if flag_find:
+        # get input the new data
+        new_title = input("Enter the new title : ")
+        new_code = input("Enter the new code : ")
+        new_unit = 0
+        while True:
+            new_unit = input("Enter the new unit : ")
+            if check_number_greater_zero(new_unit, True):
+                break
+            else:
+                print("Please enter number greater that zero for new unit ... !")
+                press_enter_to_continue
+                
+        # try to edit
+        try:
+            subject.Get_Query(
+                f"UPDATE subjects SET title='{new_title}', code='{new_code}', unit='{new_unit}' WHERE code='{code}'"
+            )
+            print("The subject edited Successfuly ... !")
+            return 0
+        except:
+            print("Editing the subject Failed ... !")
+            return 1
