@@ -20,15 +20,14 @@ def add_subject() -> None:
     
     unit = 0
     while True:
-        try: # try to make int the unit
-            unit = int(input("Enter the unit of new subject : "))
-            
-            if unit > 0:
-                break 
-            else: 
-                print("Please enter unit greater that zero ...")
-        except:
-            print("Please enter unit as a number ... ")
+        # try to make int the unit
+        unit = input("Enter the unit of new subject : ")
+        
+        if check_number_greater_zero(unit, True):
+            break
+        else:
+            print("Please enter number greater that zero for new unit ... !")
+            press_enter_to_continue
     
     # try to add a new subject
     try:
