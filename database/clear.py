@@ -3,18 +3,14 @@ from tools.func import run_command
 
 clear_database = Database("database.sqlite3")
 
+
 def clear_all_data() -> None:
     global clear_database
 
-    clear_database.Get_Query(
-        "DELETE FROM students", auto_commit=False
-    )
-    clear_database.Get_Query(
-        "DELETE FROM subjects", auto_commit=False
-    )
-    clear_database.Get_Query(
-        "DELETE FROM grades", auto_commit=False
-    )
+    clear_database.Get_Query("DELETE FROM students", auto_commit=False)
+    clear_database.Get_Query("DELETE FROM subjects", auto_commit=False)
+    clear_database.Get_Query("DELETE FROM grades", auto_commit=False)
+
 
 def main():
     global clear_database
@@ -29,4 +25,5 @@ def main():
         print("Error ... ! ")
 
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()

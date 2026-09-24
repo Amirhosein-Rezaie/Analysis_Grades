@@ -2,7 +2,8 @@ from Database import Database
 
 database_start = Database("database.sqlite3")
 
-# create table of students 
+
+# create table of students
 def create_student_table() -> None:
     global database_start
 
@@ -17,6 +18,7 @@ def create_student_table() -> None:
 
     database_start.Get_Query(query, auto_commit=False)
 
+
 def create_subjects_table() -> None:
     global database_start
 
@@ -30,6 +32,7 @@ def create_subjects_table() -> None:
     """
 
     database_start.Get_Query(query, auto_commit=False)
+
 
 def create_grades_table() -> None:
     global database_start
@@ -47,12 +50,16 @@ def create_grades_table() -> None:
 
     database_start.Get_Query(query, auto_commit=False)
 
+
 def main():
-    create_student_table(); create_subjects_table(); create_grades_table()
+    create_student_table()
+    create_subjects_table()
+    create_grades_table()
 
     database_start.Perform_Queries()
 
     database_start.Close_database()
+
 
 if __name__ == "__main__":
     main()
