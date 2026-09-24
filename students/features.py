@@ -1,26 +1,9 @@
 from database.Database import Database
-from tools.func import (
-    splitter_line_table, UP_POSITION_NEW_LINE_TABLE, MID_POSITION_NEW_LINE_TABLE, DN_POSITION_NEW_LINE_TABLE
-)
+from tools.func import table
 
 # variables
 student = Database("database.sqlite3")
-
-
-# functions as tools
-def show_one_student(student_data):
-    "a function that show one student in the table"
-    data = student_data
-    
-    splitter_line_table(UP_POSITION_NEW_LINE_TABLE)
-        
-    print(f"{'ID':<5} | {'firstname':<15} | {'lastname':<15} | {'national_code':<15}")
-    splitter_line_table(MID_POSITION_NEW_LINE_TABLE)
-    
-    print(f"{data[0]:<5} | {data[1]:<15} | {data[2]:<15} | {data[3]:<15}")
-    
-    splitter_line_table(DN_POSITION_NEW_LINE_TABLE)
-
+columns = ['firstname', 'lastname', 'national_code']
 
 # add student
 def add_student() -> int:
@@ -58,18 +41,7 @@ def show_all_students():
     rows = student.Get_Query("SELECT * FROM students", fetch_result=True)
     
     # show the title or template of table of students 
-    splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE)
-    print(f"{'#':<5} | {'Firstname':<15} | {'Lastname':<15} | {'National Code':<15}")
-    
-    splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE)
-
-    # show the data in the table
-    row_number = 1
-    for row in rows:
-        print(f"{row_number:<5} | {row[1]:<15} | {row[2]:<15} | {row[3]:<15}")
-        row_number += 1
-        
-    splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
+    table(rows, columns)
 
 
 # delete a specific student by national code
@@ -121,7 +93,7 @@ def edit_student():
         return 1
     
     # show the data of student in a table
-    show_one_student(data)
+    table(data, columns)
     
     # get new data from the user
     new_firstname = input(f"Enter the new firstname of {data[1]} : ")
@@ -155,10 +127,10 @@ def search_student() -> None:
     data = None
     
     try:
-        data = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)[0]
+        data = student.Get_Query(f"SELECT * FROM students WHERE code='{code}'", fetch_result=True)
     except:
         print("The student not found ... !")
         return 1
     
     # show the data of student in a table
-    show_one_student(data)
+    table(data, columns)
