@@ -1,4 +1,3 @@
-from pickle import TRUE
 from subprocess import run
 from os.path import exists
 from msvcrt import getwch
@@ -76,3 +75,17 @@ def table(rows: list, columns: list) -> None:
         row_number += 1
 
     splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
+
+# check the number is number and check for the range
+def check_number_greater_zero(number:int, greater_that_zero:bool) -> bool:
+    "check the number is number and check for the range"
+    
+    try:
+        number = int(number)
+        
+        if greater_that_zero and number > 0:  return True
+        elif not greater_that_zero and number < 0: return True
+        
+        return False
+    except:
+        return False
