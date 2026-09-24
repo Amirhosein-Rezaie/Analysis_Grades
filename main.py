@@ -31,14 +31,14 @@ def list_of_works() -> int:
 def list_of_subworks(number_work:int):
     "show the list of subworks base on list of works"
     
-    subworks_number = {1: 5, 2: 4, 3: 4, 4: 1} # the max number that user can choice as subword for each of works
+    subworks_number = {1: 5, 2: 5, 3: 4, 4: 1} # the max number that user can choice as subword for each of works
     subworks = {
         1: {
             "features":["(1) Add", "(2) Delete", "(3) Edit", "(4) Search", "(5) Show all"],
             "suffix": "student"
             },
         2: {
-            "features": ["(1) Add", "(2) Delete", "(3) Edit", "(4) Search"],
+            "features": ["(1) Add", "(2) Delete", "(3) Edit", "(4) Search", "(5) Show all"],
             "suffix": "Subject"
             },
         3: {
@@ -74,6 +74,7 @@ def perform_func(code_work: int, code_subwork:int) -> None:
     
     # import the modules that include the features
     from students import features as student_features
+    from subjects import features as subject_features
     
     # list of feature's functions
     func = {
@@ -83,7 +84,8 @@ def perform_func(code_work: int, code_subwork:int) -> None:
             5: student_features.show_all_students,
         },
         2:{
-            
+            1: subject_features.add_subject, 2: None,
+            3: None, 4: None, 5: subject_features.show_all_subjects
         },
         3: {
             
