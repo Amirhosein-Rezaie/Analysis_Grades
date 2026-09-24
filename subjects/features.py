@@ -26,10 +26,8 @@ def add_subject() -> None:
                 break 
             else: 
                 print("Please enter unit greater that zero ...")
-                press_enter_to_continue()
         except:
             print("Please enter unit as a number ... ")
-            press_enter_to_continue()
     
     # try to add a new subject
     try:
