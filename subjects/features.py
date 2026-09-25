@@ -160,7 +160,7 @@ def edit_subject() -> int:
 
 
 # search in the subjects by code or title
-def search_subject() -> None:
+def search_subject() -> int:
     "search in the subjects by code"
 
     global subject
@@ -181,6 +181,7 @@ def search_subject() -> None:
 
     if datas != []:
         table(datas, columns)
+        return 0
     else:
         print("Subject(s) not found ... !")
         return 1
