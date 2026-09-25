@@ -166,14 +166,13 @@ def search_subject() -> None:
     global subject
 
     # get inputs
-    code = input("Enter the code for search subject : ")
-    title = input("Enter the title for seach subject : ")
+    search = input("Enter the 'code' or 'title' for search subject : ")
 
     # try to find the subject
     datas = None
     try:
         datas = subject.Get_Query(
-            f"SELECT * FROM subjects WHERE code LIKE '{code}%' OR title LIKE '{title}%'",
+            f"SELECT * FROM subjects WHERE code LIKE '{search}%' OR title LIKE '{search}%'",
             fetch_result=True,
         )
     except:
