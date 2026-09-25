@@ -157,3 +157,31 @@ def edit_subject() -> int:
         except:
             print("Editing the subject Failed ... !")
             return 1
+
+
+# search in the subjects by code or title
+def search_subject() -> None:
+    "search in the subjects by code"
+
+    global subject
+
+    # get inputs
+    code = input("Enter the code for search subject : ")
+    title = input("Enter the title for seach subject : ")
+
+    # try to find the subject
+    datas = None
+    try:
+        datas = subject.Get_Query(
+            f"SELECT * FROM subjects WHERE code LIKE '{code}%' OR title LIKE '{title}%'",
+            fetch_result=True,
+        )
+    except:
+        print("Searching in subjects Failed ... !")
+        return 1
+
+    if datas != []:
+        table(datas, columns)
+    else:
+        print("Subject(s) not found ... !")
+        return 1
