@@ -109,7 +109,7 @@ def perform_func(code_work: int, code_subwork: int) -> None:
             1: subject_features.add_subject,
             2: subject_features.delete_subject,
             3: subject_features.edit_subject,
-            4: None,
+            4: subject_features.search_subject,
             5: subject_features.show_all_subjects,
         },
         3: {},
