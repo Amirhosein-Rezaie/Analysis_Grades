@@ -64,8 +64,8 @@ def table(rows: list, columns: list, show_id: bool = False) -> None:
 
     # valriables
     len_line = len(columns) * 15 + 20
-    print(len_line)
 
+    # start making table
     splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE, length=len_line)
     print(f"{'#':<5} | ", end="")
 
