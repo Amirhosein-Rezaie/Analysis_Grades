@@ -117,5 +117,5 @@ def search_grade() -> int:
         return 1
 
     except:
-        print("Searching for grade Fail ... !")
+        print("Searching for grade Failed ... !")
         return 0
