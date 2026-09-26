@@ -90,14 +90,29 @@ def search_grade() -> int:
     ids = {"student": 0, "subject": 0}
 
     # get student and subject code for search the IDs
-    search = input("Enter the student or subject code (exp: code): ")
-    # try to search IDs
-    try:
-        ids["student"] = search_one_record(search, TABLE_STD)[0]
-        ids["subject"] = search_one_record(search, TABLE_SBJ)[0]
-    except:
-        print("Searching for student and subject Fail ... !")
-        return 0
+    while True:
+        search = input("Enter the student or subject code (exp: code): ")
+
+        # try to search IDs
+        try:
+            find_student = search_one_record(search, TABLE_STD)
+            find_subject = search_one_record(search, TABLE_SBJ)
+
+            # check witch one found
+            if find_student:
+                ids["student"] = find_student[0]
+
+            if find_subject:
+                ids["subject"] = find_subject[0]
+
+            # show not found message if did not find anyone them
+            if find_student == False and find_subject == False:
+                print("Student or subject not found ... !")
+            else:
+                break
+
+        except:
+            print("Searching for student or subject Failed  ... !")
 
     # try to find the grades of the student or specific subject
     try:
@@ -113,8 +128,12 @@ def search_grade() -> int:
             fetch_result=True,
         )
 
-        table(data, COLUMNS)
-        return 1
+        if data != []:
+            table(data, ["ID"] + COLUMNS, True)
+            return 1
+        else:
+            print("Grades not found ... !")
+            return 0
 
     except:
         print("Searching for grade Failed ... !")
