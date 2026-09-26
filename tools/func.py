@@ -63,7 +63,7 @@ def table(rows: list, columns: list, show_id: bool = False) -> None:
     "make table for many datas. rows have to be 2D list."
 
     # valriables
-    len_line = len(columns) * 15 + 20
+    len_line = len(columns) * 15 + len(columns) * 3 + 5
 
     # start making table
     splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE, length=len_line)
