@@ -26,3 +26,10 @@ def search_one_record(code: str, table: str) -> bool | list:
         return data[0]
     else:
         return False
+
+
+# check grade. check it is greater and equal 0 and smaller and equal 20.
+def check_grade(grade: float) -> bool:
+    "check grade. check it is greater and equal 0 and smaller and equal 20."
+
+    return grade >= 0.0 and grade <= 20.0
