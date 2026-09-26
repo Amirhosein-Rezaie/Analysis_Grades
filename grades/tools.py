@@ -1,18 +1,28 @@
 from students.features import student
 from subjects.features import subject
 
+# variables
+TABLE_STD = "students"
+TABLE_SBJ = "subjects"
+
 
 # # functions
-# search for student by national code and return data of one student
-def search_student(national_code: str) -> bool | list:
-    "search for student by national code and return data of one student"
+# search for std or sbj by code and returns data for one of each other
+def search_one_record(code: str, table: str) -> bool | list:
+    "search for std or sbj by code and returns data for one of each other"
 
-    data = student.Get_Query(
-        f"SELECT * FROM students WHERE code='{national_code}'", fetch_result=True
-    )
+    query = f"SELECT * FROM {table} WHERE code='{code}'"
+    data = None
+
+    if table == TABLE_STD:
+        data = student.Get_Query(query, fetch_result=True)
+    elif table == TABLE_SBJ:
+        data = subject.Get_Query(query, fetch_result=True)
+    else:
+        print("name of tables are Wrong ... !")
+        return False
 
     if data != []:
         return data[0]
     else:
         return False
-
