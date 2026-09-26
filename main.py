@@ -95,6 +95,7 @@ def perform_func(code_work: int, code_subwork: int) -> None:
     # import the modules that include the features
     from students import features as student_features
     from subjects import features as subject_features
+    from grades import features as grade_features
 
     # list of feature's functions
     func = {
@@ -112,7 +113,12 @@ def perform_func(code_work: int, code_subwork: int) -> None:
             4: subject_features.search_subject,
             5: subject_features.show_all_subjects,
         },
-        3: {},
+        3: {
+            1: grade_features.add_grade,
+            2: None,
+            3: None,
+            4: None,
+        },
         4: {},
     }
 
