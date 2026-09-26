@@ -138,3 +138,54 @@ def search_grade() -> int:
     except:
         print("Searching for grade Failed ... !")
         return 0
+
+
+# edit the grade of a student or specific subject
+def edit_grade() -> int:
+    "edit the grade of a student or specific subject"
+
+    # search for the grade
+    search_grade()
+
+    # get the grade ID for edit
+    flag_valid_grade = False
+    grade_id = 0
+
+    while True:
+
+        try:
+            grade_id = int(input("Enter the grade ID that should edit : "))
+
+            # get new grade for the grade
+            while True:
+                new_grade = float(
+                    input(
+                        f"Enter the new grade for grade with '{grade_id}' ID (-1 to enter ID again) : "
+                    )
+                )
+
+                if new_grade == -1:  # check if user want to enter grade ID again
+                    break
+                elif check_grade(new_grade):  # check the new grade is valid
+                    flag_valid_grade = True
+                    break
+                else:
+                    print("This new grade is not valid ... !")
+
+            # check grade if ok and not enter grade ID again
+            if flag_valid_grade:
+                break
+
+        except:
+            print("Enter grade_ID and new grade as number ... !")
+
+    # try to edit the grade
+    try:
+        grade.Get_Query(f"UPDATE grades SET grade={new_grade} WHERE id={grade_id}")
+        print("The grade Successfuly Done ... !")
+
+        return 1
+
+    except:
+        print("Editing the grade Failed ... !")
+        return 0
