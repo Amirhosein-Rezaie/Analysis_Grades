@@ -45,24 +45,28 @@ def splitter_line() -> None:
 
 
 # show a splitter line for table. the arg is position of line that can manage by the const in this module
-def splitter_line_table(new_line_position: int) -> None:
+def splitter_line_table(new_line_position: int, length: int) -> None:
     "show a splitter line for table. the arg is position of line that can manage by the const in this module"
 
     if new_line_position == 1:
-        print("\n" + "-" * 60)
+        print("\n" + "-" * length)
 
     elif new_line_position == 2:
-        print("-" * 60)
+        print("-" * length)
 
     else:
-        print("-" * 60 + "\n")
+        print("-" * length + "\n")
 
 
 # make table for many datas
-def table(rows: list, columns: list) -> None:
+def table(rows: list, columns: list, show_id: bool = False) -> None:
     "make table for many datas. rows have to be 2D list."
 
-    splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE)
+    # valriables
+    len_line = len(columns) * 15 + 20
+    print(len_line)
+
+    splitter_line_table(new_line_position=UP_POSITION_NEW_LINE_TABLE, length=len_line)
     print(f"{'#':<5} | ", end="")
 
     # header
@@ -70,12 +74,16 @@ def table(rows: list, columns: list) -> None:
         print(f"{column:<15}", end=" | ")
     print()
 
-    splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE)
+    splitter_line_table(new_line_position=MID_POSITION_NEW_LINE_TABLE, length=len_line)
 
     # data
     row_number = 1
     for row in rows:
-        row = list(row)[1:]
+
+        if show_id:
+            row = list(row)
+        else:
+            row = list(row)[1:]
 
         print(f"{row_number:<5}", end=" | ")
 
@@ -85,7 +93,7 @@ def table(rows: list, columns: list) -> None:
 
         row_number += 1
 
-    splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE)
+    splitter_line_table(new_line_position=DN_POSITION_NEW_LINE_TABLE, length=len_line)
 
 
 # check the number is number and check for the range
