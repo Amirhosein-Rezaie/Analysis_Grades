@@ -1,9 +1,11 @@
 from database.Database import Database
 from grades.tools import search_one_record, TABLE_SBJ, TABLE_STD, check_grade
 from subjects.features import search_subject
+from tools.func import table
 
 # variables
 grade = Database("database.sqlite3")
+COLUMNS = ["grade", "student", "subject"]
 
 
 # # function
@@ -77,3 +79,43 @@ def add_grade() -> None:
         )
     except:
         print("Adding grade Failed ... !")
+
+
+# search the grades of a student in a specific subject
+def search_grade() -> int:
+    "search the grades of a student in a specific subject"
+
+    # variables
+    global grade
+    ids = {"student": 0, "subject": 0}
+
+    # get student and subject code for search the IDs
+    search = input("Enter the student or subject code (exp: code): ")
+    # try to search IDs
+    try:
+        ids["student"] = search_one_record(search, TABLE_STD)[0]
+        ids["subject"] = search_one_record(search, TABLE_SBJ)[0]
+    except:
+        print("Searching for student and subject Fail ... !")
+        return 0
+
+    # try to find the grades of the student or specific subject
+    try:
+        data = grade.Get_Query(
+            f"""
+            SELECT grades.id, grades.grade,
+            students.firstname || ' ' || students.lastname as student_name,
+            subjects.title
+            FROM grades, students, subjects
+            WHERE (grades.student_id={ids['student']} OR grades.subject_id={ids['subject']})
+            AND grades.student_id=students.id AND grades.subject_id=subjects.id
+            """,
+            fetch_result=True,
+        )
+
+        table(data, COLUMNS)
+        return 1
+
+    except:
+        print("Searching for grade Fail ... !")
+        return 0
